@@ -1,0 +1,76 @@
+version: '3.8'
+
+networks:
+  my_network:
+    driver: bridge
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: master
+    container_name: master
+    hostname: master
+    networks:
+      - my_network
+    ports:
+      - "2222:22"  # SSH-Port für den Master
+
+  pi1:
+    build:
+      context: .
+      dockerfile: pi_simulation
+    container_name: pi1
+    hostname: pi1
+    networks:
+      - my_network
+    ports:
+      - "2223:22"
+
+  pi2:
+    build:
+      context: .
+      dockerfile: pi_simulation
+    container_name: pi2
+    hostname: pi2
+    networks:
+      - my_network
+    ports:
+      - "2224:22"
+
+  pi3:
+    build:
+      context: .
+      dockerfile: pi_simulation
+    container_name: pi3
+    hostname: pi3
+    networks:
+      - my_network
+    ports:
+      - "2225:22"
+
+  pi4:
+    build:
+      context: .
+      dockerfile: pi_simulation
+    container_name: pi4
+    hostname: pi4
+    networks:
+      - my_network
+    ports:
+      - "2226:22"
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"  # Portainer Web GUI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - my_network
+
+volumes:
+  portainer_data:
