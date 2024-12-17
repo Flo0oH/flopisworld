@@ -7,8 +7,8 @@ networks:
 services:
   master:
     build:
-      context: .
-      dockerfile: master
+      context: ../01_Master_Dockerfile
+      dockerfile: Dockerfile  # Der Dockerfile-Name in 01_Master_Dockerfile
     container_name: master
     hostname: master
     networks:
@@ -18,8 +18,8 @@ services:
 
   pi1:
     build:
-      context: .
-      dockerfile: pi_simulation
+      context: ../02_Slave_Dockerfile
+      dockerfile: Dockerfile  # Der Dockerfile-Name in 02_Slave_Dockerfile
     container_name: pi1
     hostname: pi1
     networks:
@@ -29,8 +29,8 @@ services:
 
   pi2:
     build:
-      context: .
-      dockerfile: pi_simulation
+      context: ../02_Slave_Dockerfile
+      dockerfile: Dockerfile
     container_name: pi2
     hostname: pi2
     networks:
@@ -40,8 +40,8 @@ services:
 
   pi3:
     build:
-      context: .
-      dockerfile: pi_simulation
+      context: ../02_Slave_Dockerfile
+      dockerfile: Dockerfile
     container_name: pi3
     hostname: pi3
     networks:
@@ -51,8 +51,8 @@ services:
 
   pi4:
     build:
-      context: .
-      dockerfile: pi_simulation
+      context: ../02_Slave_Dockerfile
+      dockerfile: Dockerfile
     container_name: pi4
     hostname: pi4
     networks:
@@ -62,7 +62,7 @@ services:
 
   portainer:
     image: portainer/portainer-ce
-    container_name: portainer
+    container_name: portainer_2
     restart: always
     ports:
       - "9000:9000"  # Portainer Web GUI
