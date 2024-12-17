@@ -8,18 +8,18 @@ services:
   master:
     build:
       context: ../01_Master_Dockerfile
-      dockerfile: Dockerfile  # Der Dockerfile-Name in 01_Master_Dockerfile
+      dockerfile: Dockerfile
     container_name: master
     hostname: master
     networks:
       - my_network
     ports:
-      - "2222:22"  # SSH-Port für den Master
+      - "2222:22"
 
   pi1:
     build:
       context: ../02_Slave_Dockerfile
-      dockerfile: Dockerfile  # Der Dockerfile-Name in 02_Slave_Dockerfile
+      dockerfile: Dockerfile
     container_name: pi1
     hostname: pi1
     networks:
@@ -62,10 +62,10 @@ services:
 
   portainer:
     image: portainer/portainer-ce
-    container_name: portainer_2
+    container_name: portainer_master
     restart: always
     ports:
-      - "9000:9000"  # Portainer Web GUI
+      - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data

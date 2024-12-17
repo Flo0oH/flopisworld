@@ -1,16 +1,11 @@
 ﻿# Dockerfile: pi_simulation
-FROM opensuse/leap
+FROM --platform=linux/arm64 arm64v8/debian:bullseye
 
-# Installiere SSH, ohne interaktive Eingabe
-RUN zypper --non-interactive refresh && \
-    zypper --non-interactive install openssh && \
+RUN apt-get update && apt-get install -y openssh-server sudo && \
     mkdir /var/run/sshd && \
-    echo 'root:root' | chpasswd
+    echo 'root:raspberry' | chpasswd && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
-# SSH konfigurieren
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-
-# Port freigeben
+RUN ssh-keygen -A
 EXPOSE 22
-
 CMD ["/usr/sbin/sshd", "-D"]
