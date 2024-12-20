@@ -1,5 +1,15 @@
 #!/bin/bash
 
+
+echo "🛠️  Installiere notwendige Tools..."
+
+
+
+# Fehlende Pakete installieren
+apt-get install -y apt-utils gnupg gnupg2 gnupg1 curl
+
+echo "✅  System aktualisiert und notwendige Tools installiert."
+
 set -e
 
 echo "------------------------------------"
