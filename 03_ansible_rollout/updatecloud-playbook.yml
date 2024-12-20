@@ -1,0 +1,19 @@
+---
+- name: Update all Pi servers
+  hosts: pis
+  become: yes
+  tasks:
+
+    - name: Copy the update script to the Pi servers
+      copy:
+        src: ./cloudtools/cloudinstall.sh
+        dest: /tmp/cloudupdate_script.sh
+        mode: '0755'
+
+    - name: Execute the update script
+      shell: /tmp/cloudupdate_script.sh
+      register: update_result
+
+    - name: Display the update output
+      debug:
+        msg: "{{ update_result.stdout }}"
