@@ -1,3 +1,7 @@
+ssh root@172.24.0.3   # Für pi1
+apt-get update && apt-get install -y python3
+exit
+
 ssh root@172.24.0.7   # Für pi2
 apt-get update && apt-get install -y python3
 exit
