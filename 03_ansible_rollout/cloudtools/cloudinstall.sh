@@ -22,9 +22,6 @@ check_command() {
   command -v "$1" >/dev/null 2>&1
 }
 
-# 1. System-Update
-echo "🔄  Aktualisiere das System..."
-apt-get update && apt-get upgrade -y
 
 # 2. Docker & Docker Compose installieren
 if ! check_command docker; then
